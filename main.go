@@ -35,12 +35,13 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					response := linebot.NewTextMessage(message.Text)
+					response := StrParser(message.Text)
 					if _, err = bot.ReplyMessage(event.ReplyToken, response).Do(); err != nil {
 						log.Print(err)
 					}
 				default:
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello World")).Do(); err != nil {
+					const usage = "請輸入'看魚'、'看海鮮'或'看火鍋料'哦"
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(usage)).Do(); err != nil {
 						log.Print(err)
 					}
 				}
@@ -48,5 +49,5 @@ func main() {
 		}
 	})
 
-	router.Run()
+	router.Run(":8080")
 }
