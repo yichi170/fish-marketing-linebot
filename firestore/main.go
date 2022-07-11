@@ -9,9 +9,9 @@ import (
 	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go/v4"
 	"github.com/gin-gonic/gin"
-	cors "github.com/rs/cors/wrapper/gin"
 
 	_ "github.com/joho/godotenv/autoload"
+	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
 )
 
@@ -50,9 +50,32 @@ func getfish(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, m)
 }
 
+func getallfish(c *gin.Context) {
+	client, err := connect()
+	ctx := context.Background()
+	if err != nil {
+		log.Fatalln("failed to connect Cloud Firestore @getallfish")
+	}
+	var mpslice []map[string]interface{}
+	iter := client.Collection("fish").Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalln("iterate failed @getallfish")
+		}
+		mpslice = append(mpslice, doc.Data())
+	}
+	defer client.Close()
+	c.IndentedJSON(http.StatusOK, mpslice)
+}
+
 func main() {
 	r := gin.Default()
-	r.Use(cors.Default())
+	r.Use()
 	r.GET("/fish/:fishname", getfish)
+	r.GET("/fish", getallfish)
 	r.Run()
 }
