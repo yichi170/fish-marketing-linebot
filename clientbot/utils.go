@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"os"
 	"net/http"
 	"strings"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/line/line-bot-sdk-go/v7/linebot"
 )
 
@@ -26,7 +28,8 @@ func StrParser(request string) *linebot.TextMessage {
 
 func getallfish() string {
 	retmsg := ""
-	resp, err := http.Get("http://localhost:8080/fish")
+	address := os.Getenv("API_ADDRESS") + "/fish"
+	resp, err := http.Get(address)
 	if err != nil {
 		log.Fatalln(err)
 	}
