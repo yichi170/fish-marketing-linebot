@@ -16,7 +16,7 @@ import (
 )
 
 func connect() (*firestore.Client, error) {
-	sak := os.Getenv("SEVICE_ACCOUNT_KEY")
+	sak := os.Getenv("SERVICE_ACCOUNT_KEY")
 	ctx := context.Background()
 	opt := option.WithCredentialsFile(sak)
 	app, err := firebase.NewApp(ctx, nil, opt)
