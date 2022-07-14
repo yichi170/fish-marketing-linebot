@@ -18,6 +18,7 @@ import (
 func connect() (*firestore.Client, error) {
 	sak := os.Getenv("SERVICE_ACCOUNT_KEY_JSON")
 	ctx := context.Background()
+	config := &firebase.Config{ProjectID: "fish63-485"}
 	opt := option.WithCredentialsJSON([]byte(sak))
 	app, err := firebase.NewApp(ctx, nil, opt)
 	if err != nil {
@@ -73,7 +74,7 @@ func getallfish(c *gin.Context) {
 }
 
 func main() {
-	gin.SetMode(gin.ReleaseMode)
+	// gin.SetMode(gin.ReleaseMode)
 	r := setupRouter()
 	r.Run()
 }
