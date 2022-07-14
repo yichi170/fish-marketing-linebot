@@ -19,3 +19,7 @@
 
 # MacOS
 *.DS_Store
+
+# Cloud Firestore
+*firebase*.json
+

@@ -1,0 +1,47 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - api/**
+      - .github/workflows/api.yml
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - api/**
+      - .github/workflows/api.yml
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.17.0'
+      - run: go version
+      - name: Test api
+        run: |
+          cd api/
+          go test -v ./
+      - name: Build api
+        run: |
+          cd api/
+          go build -v ./
+  CD:
+    needs: CI
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy client to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.API_APP_NAME}}
+          heroku_email: ${{secrets.EMAIL}}
+          appdir: "api"
+          usedocker: true
+

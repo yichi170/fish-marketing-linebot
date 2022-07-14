@@ -73,9 +73,15 @@ func getallfish(c *gin.Context) {
 }
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
+	r := setupRouter()
+	r.Run()
+}
+
+func setupRouter() *gin.Engine {
 	r := gin.Default()
-	r.Use()
 	r.GET("/fish/:fishname", getfish)
 	r.GET("/fish", getallfish)
-	r.Run()
+
+	return r
 }
