@@ -20,7 +20,7 @@ func connect() (*firestore.Client, error) {
 	ctx := context.Background()
 	config := &firebase.Config{ProjectID: "fish63-485"}
 	opt := option.WithCredentialsJSON([]byte(sak))
-	app, err := firebase.NewApp(ctx, nil, opt)
+	app, err := firebase.NewApp(ctx, config, opt)
 	if err != nil {
 		log.Fatalln(err)
 		return nil, err
