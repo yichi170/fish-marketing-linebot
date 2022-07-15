@@ -14,12 +14,11 @@ func main() {
 		os.Getenv("CHANNEL_SECRET"),
 		os.Getenv("CHANNEL_TOKEN"),
 	)
-
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	gin.SetMode(gin.ReleaseMode)
+	// gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	router.POST("/callback", func(c *gin.Context) {
@@ -32,16 +31,17 @@ func main() {
 			}
 			return
 		}
+
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					response := StrParser(message.Text)
+					response := linebot.NewTextMessage(message.Text) //StrParser(message.Text)
 					if _, err = bot.ReplyMessage(event.ReplyToken, response).Do(); err != nil {
 						log.Print(err)
 					}
 				default:
-					const usage = "請輸入'看魚'、'看海鮮'或'看火鍋料'哦"
+					const usage = "請輸入"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(usage)).Do(); err != nil {
 						log.Print(err)
 					}

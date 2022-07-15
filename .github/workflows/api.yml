@@ -1,4 +1,4 @@
-name: Deploy to Heroku
+name: API CI/CD
 
 on:
   push:
@@ -21,22 +21,20 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '>=1.17.0'
-      - run: go version
-      - name: Test api
+      - name: Test API
         run: |
           cd api/
           go test -v ./
-      - name: Build api
+      - name: Build API
         run: |
           cd api/
           go build -v ./
   CD:
-    needs: CI
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
 
-    - name: Deploy client to Heroku
+    - name: Deploy admin to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}

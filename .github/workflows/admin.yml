@@ -1,0 +1,29 @@
+name: Admin CD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - adminbot/**
+      - .github/workflows/admin.yml
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - adminbot/**
+      - .github/workflows/admin.yml
+
+jobs:
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy admin to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.ADMIN_APP_NAME}}
+          heroku_email: ${{secrets.EMAIL}}
+          appdir: "adminbot"
+          usedocker: true
+
