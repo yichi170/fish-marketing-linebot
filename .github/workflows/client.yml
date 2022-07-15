@@ -1,4 +1,4 @@
-name: Deploy to Heroku
+name: Client CD
 
 on:
   push:
@@ -25,4 +25,5 @@ jobs:
           heroku_app_name: ${{secrets.CLIENT_APP_NAME}}
           heroku_email: ${{secrets.EMAIL}}
           appdir: "clientbot"
+          usedocker: true
 
