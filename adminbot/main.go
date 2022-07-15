@@ -36,12 +36,12 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					response := linebot.NewTextMessage(message.Text) //StrParser(message.Text)
+					response := StrParser(message.Text)
 					if _, err = bot.ReplyMessage(event.ReplyToken, response).Do(); err != nil {
 						log.Print(err)
 					}
 				default:
-					const usage = "請輸入"
+					const usage = "請輸入文字"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(usage)).Do(); err != nil {
 						log.Print(err)
 					}
