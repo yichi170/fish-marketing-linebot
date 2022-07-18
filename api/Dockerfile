@@ -6,7 +6,7 @@ WORKDIR /home/goapi
 ADD . /home/goapi
 
 RUN go mod download
-RUN go test -v .
+RUN go test -v /home/goapi
 RUN go build -o api
 
 FROM alpine:latest
