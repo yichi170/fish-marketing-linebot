@@ -10,10 +10,10 @@ This repo aims to promote the fish stall in 新北市汐止區金龍市場.
 
 `admin`: Line bot for updating fish price by fishmonger
 
+![architecture img](https://github.com/yichi170/fish-marketing-linebot/statics/architecture.png)
+
 ## TODO
 
-- [ ] `clientbot/`: create a Dockerfile or Procfile
+- [ ] `clientbot/`: using flex messages
 
-- [ ] `firestore/`: deploy to Heroku
-
-- [ ] `admin/`: pending...
+- [ ] `firestore/`: testing
