@@ -13,28 +13,12 @@ on:
       - .github/workflows/api.yml
 
 jobs:
-  CI:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '>=1.17.0'
-      - name: Test API
-        run: |
-          cd api/
-          go test -v ./
-      - name: Build API
-        run: |
-          cd api/
-          go build -v ./
-  CD:
+  CICD:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
 
-    - name: Deploy admin to Heroku
+    - name: Deploy api to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
