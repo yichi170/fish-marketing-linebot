@@ -44,8 +44,7 @@ func setupRouter() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/fish", getallfish)
-	r.GET("/fish/:fishname", getfish)
-	r.POST("/fish/:fishname", postfish)
+	r.POST("/fish", postfish)
 
 	return r
 }

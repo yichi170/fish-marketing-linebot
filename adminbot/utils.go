@@ -15,7 +15,7 @@ import (
 
 func StrParser(request string) *linebot.TextMessage {
 	words := strings.Fields(request)
-	response := "請輸入「商品名 價錢 單位」並以空白隔開"
+	response := "請輸入「商品名 單位 (斤/盤) 價錢」並以空白隔開\n例：鮭魚 斤 750"
 	if len(words) < 3 {
 		return linebot.NewTextMessage(response)
 
@@ -33,8 +33,8 @@ func postfish(words []string) string {
 
 	data := url.Values{
 		"name":  {words[0]},
-		"price": {words[1]},
-		"unit":  {words[2]},
+		"unit":  {words[1]},
+		"price": {words[2]},
 	}
 
 	retmsg := ""
