@@ -35,7 +35,7 @@ func connect() (*firestore.Client, error) {
 }
 
 func main() {
-	// gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 	r := setupRouter()
 	r.Run()
 }
@@ -45,6 +45,7 @@ func setupRouter() *gin.Engine {
 
 	r.GET("/fish", getallfish)
 	r.POST("/fish", postfish)
+	r.POST("/fish/delete", deletefish)
 
 	return r
 }

@@ -93,3 +93,33 @@ func postfish(c *gin.Context) {
 	defer client.Close()
 	c.String(http.StatusOK, ret)
 }
+
+func deletefish(c *gin.Context) {
+	client, err := connect()
+	ctx := context.Background()
+	if err != nil {
+		log.Fatalln("failed to connect Cloud Firestore @DELETE")
+	}
+	defer client.Close()
+
+	name := c.PostForm("name")
+	deleted := false
+	var ret string
+	iter := client.Collection("fish").Where("name", "==", name).Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalln(err)
+		}
+		doc.Ref.Delete(ctx)
+		deleted = true
+		ret = "已將「" + name + "」的資料刪除"
+	}
+	if deleted == false {
+		ret = "資料庫沒有「" + name + "」的資料哦"
+	}
+	c.String(http.StatusOK, ret)
+}
