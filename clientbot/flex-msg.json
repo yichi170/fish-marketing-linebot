@@ -1,0 +1,58 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "🐟",
+          "size": "sm"
+        },
+        {
+          "type": "text",
+          "text": "鮭魚",
+          "weight": "bold",
+          "size": "xxl",
+          "margin": "md"
+        },
+        {
+          "type": "separator",
+          "margin": "xxl"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "xxl",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "價格",
+                  "size": "sm",
+                  "color": "#555555",
+                  "flex": 0
+                },
+                {
+                  "type": "text",
+                  "text": "$300/斤",
+                  "size": "sm",
+                  "color": "#111111",
+                  "align": "end"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "styles": {
+      "footer": {
+        "separator": true
+      }
+    }
+  }
