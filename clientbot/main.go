@@ -41,7 +41,7 @@ func main() {
 						log.Print(err)
 					}
 				default:
-					const usage = "請輸入'看魚'、'看海鮮'或'看火鍋料'哦"
+					const usage = "請輸入'看魚價'來看今日魚價哦"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(usage)).Do(); err != nil {
 						log.Print(err)
 					}

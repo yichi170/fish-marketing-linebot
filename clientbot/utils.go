@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"os"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "github.com/joho/godotenv/autoload"
@@ -14,14 +14,10 @@ import (
 
 func StrParser(request string) *linebot.TextMessage {
 	words := strings.Fields(request)
-	response := "請輸入'看魚'、'看海鮮'或'看火鍋料'哦"
+	response := "請輸入'看魚價'來看今日魚價哦"
 	switch words[0] {
-	case "看魚":
+	case "看魚價":
 		response = getallfish()
-	case "看海鮮":
-		response = "蛤蠣一斤120"
-	case "看火鍋料":
-		response = "火鍋料一斤250"
 	}
 	return linebot.NewTextMessage(response)
 }
@@ -42,8 +38,11 @@ func getallfish() string {
 	if err := json.Unmarshal(body, &fishmpslice); err != nil {
 		log.Fatalln(err)
 	}
-	for _, fishmp := range fishmpslice {
-		retmsg += fishmp["name"].(string) + "一" + fishmp["unit"].(string) + fishmp["price"].(string) + "元\n"
+	for i, fishmp := range fishmpslice {
+		retmsg += fishmp["name"].(string) + "一" + fishmp["unit"].(string) + fishmp["price"].(string) + "元"
+		if i < len(fishmpslice)-1 {
+			retmsg += "\n"
+		}
 	}
 	return retmsg
 }
