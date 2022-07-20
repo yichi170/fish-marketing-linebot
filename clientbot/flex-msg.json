@@ -11,7 +11,7 @@
         },
         {
           "type": "text",
-          "text": "鮭魚",
+          "text": "name",
           "weight": "bold",
           "size": "xxl",
           "margin": "md"
@@ -39,7 +39,7 @@
                 },
                 {
                   "type": "text",
-                  "text": "$300/斤",
+                  "text": "$price/unit",
                   "size": "sm",
                   "color": "#111111",
                   "align": "end"

@@ -12,20 +12,25 @@ import (
 	"github.com/line/line-bot-sdk-go/v7/linebot"
 )
 
-func StrParser(request string) *linebot.FlexMessage {
+func StrParser(request string) linebot.SendingMessage {
 	words := strings.Fields(request)
 	response := "請輸入'看魚價'來看今日魚價哦"
-	var ret []byte
+
+	var retmsg linebot.SendingMessage
 	switch words[0] {
 	case "看魚價":
 		response = getallfish(false)
-		ret = []byte(getallfish(true))
+		ret := []byte(getallfish(true))
+		container, err := linebot.UnmarshalFlexMessageJSON(ret)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		retmsg = linebot.NewFlexMessage(response, container)
+	default:
+		retmsg = linebot.NewTextMessage(response)
 	}
-	container, err := linebot.UnmarshalFlexMessageJSON(ret)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	return linebot.NewFlexMessage(response, container)
+
+	return retmsg
 }
 
 func getallfish(goodlook bool) string {
