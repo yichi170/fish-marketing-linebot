@@ -14,10 +14,6 @@ This repo aims to promote the fish stall in 新北市汐止區金龍市場.
 
 ## TODO
 
-- [ ] `clientbot/`: using flex messages
-
 - [ ] `firestore/`: testing
-
-- [ ] translate API for getting and posting the Cloud Firestore
 
 - [ ] location / helping msg
