@@ -12,7 +12,7 @@ FROM alpine:latest
 
 RUN mkdir -p /home/goclient
 WORKDIR /home/goclient
-COPY --from=builder /home/goclient/client ./
+COPY --from=builder /home/goclient/client /home/goclient/flex-msg.json ./
 ENV PORT 8080
 EXPOSE 8080
 
