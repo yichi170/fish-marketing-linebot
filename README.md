@@ -12,12 +12,6 @@ This repo aims to promote the fish stall in 新北市汐止區金龍市場.
 
 ![architecture img](./statics/architecture.png)
 
-## Client Linebot
-
-> LINE ID: @667ibfnw
-
-<img src="https://qr-official.line.me/sid/L/667ibfnw.png" alt="Clientbot QRcode" width="250"/>
-
 ## TODO
 
 - [ ] `firestore/`: testing
